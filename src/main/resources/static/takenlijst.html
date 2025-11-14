@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <title>Onderhoudstaken</title>
+    <script src="js/takenlijst.js" type="module"></script>
+    <link rel="icon" href="images/hamer.ico">
+    <link rel="stylesheet" href="css/luigi.css">
+</head>
+<body>
+<h1>Onderhoudstaken voor <span id="werknemer"></span></h1>
+<nav>
+    <ul>
+        <li>
+            <a href="index.html">thuis</a>
+        </li>
+
+    </ul>
+</nav>
+<form>Kies een modus:
+    <br><br>
+    <input type="radio" name="kies" value="online" id="online" ><label for="online">Online</label>
+    <br>
+    <input type="radio" name="kies" value="offline" id="offline" checked><label for="offline">Offline</label>
+</form>
+<label>hoeveel dagen vooruitlopen?:
+    <span id="dagFout" class="fout" hidden>getal nok</span>
+    <input id="getal" required pattern="^\d+$"
+           autofocus>
+</label>
+<button id="zoekTaken">haal de takenlijst op</button>
+
+<table>
+    <thead id="hoofd1" hidden>
+    <tr>
+        <th>familienaam</th>
+        <th>voornaam</th>
+        <th>locatieId</th>
+    </tr>
+    </thead>
+    <tbody id="werknemersBody"></tbody>
+</table>
+<div id="storing" class="fout" hidden>Storing, contacteer helpdesk.</div>
+<div id="conflict" class="fout" hidden></div>
+<div id="badRequest" class="fout" hidden></div>
+<div id="mededeling" class="mededeling" hidden>Geen werknemers gevonden!</div>
+</body>
+</html>
