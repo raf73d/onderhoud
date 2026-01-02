@@ -16,13 +16,15 @@
 
     </ul>
 </nav>
-<form>Kies een modus:
+<form>Kies uw opties:
     <br><br>
-    <input type="radio" name="kies" value="online" id="online" ><label for="online">Online</label>
+    <label for="online">
+    <input type="checkbox" name="kies" value="online" id="online" >Online</label>
     <br>
-    <input type="radio" name="kies" value="offline" id="offline" checked><label for="offline">Offline</label>
+    <label for="offline">
+    <input type="checkbox" name="kies" value="offline" id="offline" checked>Offline</label>
 </form>
-<label>hoeveel dagen vooruitlopen?:
+<label>tijdsbestek (dagen):
     <span id="dagFout" class="fout" hidden>getal nok</span>
     <input id="getal" required pattern="^\d+$"
            autofocus>
@@ -32,9 +34,13 @@
 <table>
     <thead id="hoofd1" hidden>
     <tr>
-        <th>familienaam</th>
-        <th>voornaam</th>
-        <th>locatieId</th>
+        <th>onderhoudsDatum</th>
+        <th>teller</th>
+        <th>omschrijving</th>
+        <th>machineId</th>
+        <th>maintenanceType</th>
+        <th>mode</th>
+        <th>status</th>
     </tr>
     </thead>
     <tbody id="werknemersBody"></tbody>
