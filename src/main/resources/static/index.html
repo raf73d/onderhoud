@@ -2,39 +2,49 @@
 <html lang="nl">
 <head>
     <title>Onderhoudstaken</title>
-    <script src="js/index.js" type ="module"></script>
+    <script src="js/index.js" type="module"></script>
     <link rel="icon" href="images/hamer.ico">
-    <link rel="stylesheet" href="css/luigi.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-<h1>Onderhoudstaken</h1>
-<nav>
-    <ul>
-        <li>
-
-        </li>
-
-    </ul>
-</nav>
-<label>familienaam:
-    <span id="naamFout" class="fout" hidden>naam nok</span>
-    <input id="naam" required pattern="[A-Za-zéèÉÈ][A-Za-zéèÉÈ\s\-]+"
-           autofocus>
-</label>
-<button id="zoek">zoek werknemer</button>
-<table>
-    <thead id="hoofd1" hidden>
-    <tr>
-        <th>familienaam</th>
-        <th>voornaam</th>
-        <th>locatieId</th>
-    </tr>
-    </thead>
-    <tbody id="werknemersBody"></tbody>
-</table>
-<div id="storing" class="fout" hidden>Storing, contacteer helpdesk.</div>
-<div id="conflict" class="fout" hidden></div>
-<div id="badRequest" class="fout" hidden></div>
-<div id="mededeling" class="mededeling" hidden>Geen werknemers gevonden!</div>
+<div class="container-lg bg-light-subtle">
+    <div class="row">
+        <div class="col">
+            <h1>Werknemer</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <label>familienaam:
+                <input id="naam" autocomplete="off" pattern="[A-Za-zÀ-ÖØ-öø-ÿ]+([ \-][A-Za-zÀ-ÖØ-öø-ÿ]+)*"
+                       autofocus required>
+            </label>
+        </div>
+        <div class="col-2">
+            <button class="btn-outline-dark rounded-0" id="zoek">zoek werknemer</button>
+        </div>
+        <div class="col-4">
+            <span id="naamFout" class="bg-danger-subtle text-white p-2 rounded" hidden>naam nok</span>
+            <div id="storing" class="bg-danger-subtle text-white p-2 rounded" hidden>Storing, contacteer helpdesk.</div>
+            <div id="conflict" class="fout" hidden>conflict</div>
+            <div id="badRequest" class="fout" hidden>badrequest</div>
+            <div id="mededeling" class="bg-danger-subtle text-white p-2 rounded" hidden>Geen werknemers gevonden!</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+    <table class="table table-striped">
+        <thead id="hoofd1" hidden>
+        <tr>
+            <th>familienaam</th>
+            <th>voornaam</th>
+            <th>locatieId</th>
+        </tr>
+        </thead>
+        <tbody id="werknemersBody"></tbody>
+    </table>
+        </div>
+</div>
+</div>
 </body>
 </html>

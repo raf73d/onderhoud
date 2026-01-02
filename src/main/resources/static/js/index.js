@@ -8,10 +8,14 @@ byId("zoek").onclick = async () =>{
     if (!naamInput.checkValidity()) {
         toon("naamFout");
         verberg("hoofd1");
+
     }
     const aantalFouten = document.querySelectorAll(".fout:not([hidden])").length;
-    if (aantalFouten === 0) {
+    if (aantalFouten === 0 && naamInput.checkValidity()) {
         zoek(naamInput.value);
+    }
+    else {
+        byId("werknemersBody").innerHTML = "";
     }
 
 }
@@ -19,9 +23,10 @@ byId("zoek").onclick = async () =>{
 async function zoek (woord){
     const response = await fetch(`werknemers?naamBevat=${woord}`);
     if (response.ok) {
-        werknemersBody.innerHTML = "";
+        byId("werknemersBody").innerHTML = "";
         const werknemers = await response.json();
         if (werknemers.length > 0) {
+            verberg("naamFout", "storing", "conflict","badRequest","mededeling");
             for (const werknemer of werknemers) {
                 const tr = werknemersBody.insertRow();
                 tr.insertCell().textContent = werknemer.familienaam;
@@ -42,6 +47,8 @@ async function zoek (woord){
         }
     }
     else{
-        toon("storing")
+        toon("storing");
+        verberg("hoofd1");
+        byId("werknemersBody").textContent = "";
     }
 }
