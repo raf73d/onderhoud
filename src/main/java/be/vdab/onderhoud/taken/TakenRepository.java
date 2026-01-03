@@ -1,6 +1,5 @@
 package be.vdab.onderhoud.taken;
 
-import be.vdab.onderhoud.werknemers.Werknemer;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +11,28 @@ public class TakenRepository {
 
     public TakenRepository(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
+    }
+
+    void updateTaaktellerEnOnderhoudsdatum (long id) {
+        var sql = """
+                update taken
+                set teller = 0,
+                    onderhoudsDatum = CURRENT_DATE()
+                where id = ?
+                """;
+        if (jdbcClient.sql(sql).param(id).update() == 0) {
+            throw new TaakNietGevondenException();
+        }
+    }
+    void updateTaakOnderhoudsdatum (long id) {
+        var sql = """
+                update taken
+                set onderhoudsDatum = currdate()
+                where id = ?
+        """;
+        if (jdbcClient.sql(sql).param(id).update() == 0) {
+            throw new TaakNietGevondenException();
+        }
     }
 
     List<Taak> findTakenByWerknemerId (long id, long locatieId){
@@ -49,5 +70,6 @@ public class TakenRepository {
                 .param(locatieId)
                 .query(Taak.class).list();
     }
+
     }
 

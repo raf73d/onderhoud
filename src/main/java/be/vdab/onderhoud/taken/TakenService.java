@@ -20,4 +20,8 @@ public class TakenService {
     {
         return takenRepository.findTakenByWerknemerId(werknemerId, locatieId);
     }
+   @Transactional (readOnly=false)
+    void updateTaakTellerEnOnderhoudsdatum(long id){
+        takenRepository.updateTaaktellerEnOnderhoudsdatum(id);
+    }
 }
