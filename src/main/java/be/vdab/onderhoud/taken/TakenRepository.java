@@ -90,8 +90,17 @@ public class TakenRepository {
 
     public List<Taak> findTakenvanafDatum(LocalDate datum) {
         var sql = """
-                select * from taken
-                where onderhoudsDatum = ?
+                select id,
+                    onderhoudsDatum,
+                    teller,
+                    omschrijving,
+                    machineId,
+                    maintenanceType,
+                    mode,
+                    status,
+                    lastPerson from taken
+                where onderhoudsDatum >= ?
+                order by onderhoudsDatum is null, onderhoudsDatum;
         """;
         return jdbcClient.sql(sql).param(datum).query(Taak.class).list();
     }

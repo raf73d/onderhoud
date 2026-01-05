@@ -4,6 +4,7 @@ package be.vdab.onderhoud.taken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -20,6 +21,11 @@ public class TakenService {
     {
         return takenRepository.findTakenByWerknemerId(werknemerId, locatieId);
     }
+
+    List<Taak> findTakenVanafDatum (LocalDate datum){
+        return takenRepository.findTakenvanafDatum(datum);
+    }
+
    @Transactional
     void updateTaakTellerEnOFOnderhoudsdatum(long id, String lastPerson){
         var taak = takenRepository.findTaak(id).orElseThrow(()->new TaakNietGevondenException());

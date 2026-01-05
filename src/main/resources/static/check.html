@@ -9,13 +9,13 @@
 </head>
 <body>
 <div class="container-lg bg-light-subtle">
-<div class="row">
-    <div class="col-6">
-        <h1>Check</h1>
+    <div class="row">
+        <div class="col-6">
+            <h1>Check</h1>
+
+        </div>
 
     </div>
-
-</div>
     <div class="row">
         <div class="col">
             <ul class="nav">
@@ -26,23 +26,38 @@
             </ul>
         </div>
     </div>
+    <div class="row mt-3">
+        <div class="col-2">
+            <label>datum:
+                <input id="datum" autocomplete="off"
+                       autofocus required type="date">
+            </label>
+        </div>
+        <div class="col-2">
+            <button class="btn-outline-dark rounded-2" id="datumKnop">zoek taken</button>
+        </div>
+        <div class="col-3">
+            <span id="datumFout" class="bg-danger-subtle text-white p-2 rounded" hidden>datum nok</span>
+        </div>
+        <div class="col-5"></div>
+    </div>
     <div class="row">
-            <div class="col-12">
-                <table class="table table-striped">
-                    <thead id="hoofd1">
-                    <tr>
-                        <th>id</th>
-                        <th>onderhoudsDatum</th>
-                        <th>teller</th>
-                        <th>omschrijving</th>
-                        <th>machineId</th>
-                        <th>lastPerson</th>
-                        <th>status</th>
-                    </tr>
-                    </thead>
-                    <tbody id="takenBody"></tbody>
-                </table>
-            </div>
+        <div class="col-12">
+            <table class="table table-striped">
+                <thead id="hoofd1" hidden>
+                <tr>
+                    <th>id</th>
+                    <th>onderhoudsDatum</th>
+                    <th>teller</th>
+                    <th>omschrijving</th>
+                    <th>machineId</th>
+                    <th>status</th>
+                    <th>lastPerson</th>
+                </tr>
+                </thead>
+                <tbody id="takenBody"></tbody>
+            </table>
+        </div>
     </div>
     <div class="row">
         <div class="col-10"></div>
@@ -51,6 +66,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

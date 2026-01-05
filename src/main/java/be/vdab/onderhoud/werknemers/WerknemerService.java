@@ -22,7 +22,7 @@ public class WerknemerService {
       List<Werknemer> werknemersLijst = werknemerRepository.findByFamilieNaamBevat(woord);
       List<WerknemerMetLocatie> werknemerMetLocatie = new ArrayList<>();
       for (Werknemer werknemer : werknemersLijst) {
-          var locatie = locatieRepository.getLocatie((int) werknemer.getId()).map(dezeLocatie -> dezeLocatie.getNaam()).orElse(null);
+          var locatie = locatieRepository.getLocatie((int)werknemer.getLocatieId()).get().getNaam();
           var nieuweWerkenemerMetLocatie= new WerknemerMetLocatie(werknemer.getId(),werknemer.getVoornaam(),werknemer.getFamilienaam(),locatie, (int) werknemer.getLocatieId());
           werknemerMetLocatie.add(nieuweWerkenemerMetLocatie);
       }
