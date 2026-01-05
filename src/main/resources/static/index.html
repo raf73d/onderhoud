@@ -9,9 +9,19 @@
 <body>
 <div class="container-lg bg-light-subtle">
     <div class="row">
-        <div class="col">
+        <div class="col-6">
             <h1>Werknemer</h1>
         </div>
+    </div>
+        <div class="row">
+            <div class="col">
+                <ul class="nav">
+                    <li class="nav-item bg-dark-subtle">
+                        <a class="nav-link" href="check.html">Check</a>
+                    </li>
+                </ul>
+            </div>
+
     </div>
     <div class="row">
         <div class="col-3">
@@ -21,7 +31,7 @@
             </label>
         </div>
         <div class="col-2">
-            <button class="btn-outline-dark rounded-0" id="zoek">zoek werknemer</button>
+            <button class="btn-outline-dark rounded-2" id="zoek">zoek werknemer</button>
         </div>
         <div class="col-4">
             <span id="naamFout" class="bg-danger-subtle text-white p-2 rounded" hidden>naam nok</span>
@@ -38,7 +48,7 @@
         <tr>
             <th>familienaam</th>
             <th>voornaam</th>
-            <th>locatieId</th>
+            <th>locatie</th>
         </tr>
         </thead>
         <tbody id="werknemersBody"></tbody>

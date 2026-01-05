@@ -12,8 +12,9 @@ public class Taak {
     private final MaintenanceType maintenanceType;
     private final Mode mode;
     private final Status status;
+    private final String lastPerson;
 
-    public Taak(Long id, LocalDate onderhoudsDatum, Integer teller, String omschrijving, long machineId, MaintenanceType maintenanceType, Mode mode, Status status) {
+    public Taak(Long id, LocalDate onderhoudsDatum, Integer teller, String omschrijving, long machineId, MaintenanceType maintenanceType, Mode mode, Status status, String lastPerson) {
         this.id = id;
         this.onderhoudsDatum = onderhoudsDatum;
         this.teller = teller;
@@ -22,6 +23,7 @@ public class Taak {
         this.maintenanceType = maintenanceType;
         this.mode = mode;
         this.status = status;
+        this.lastPerson = lastPerson;
     }
 
     public LocalDate getOnderhoudsDatum() {
@@ -54,5 +56,9 @@ public class Taak {
 
     public Integer getTeller() {
         return teller;
+    }
+
+    public String getLastPerson() {
+        return lastPerson;
     }
 }

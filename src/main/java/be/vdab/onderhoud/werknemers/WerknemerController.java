@@ -18,7 +18,9 @@ public class WerknemerController {
     }
 
     @GetMapping(params = "naamBevat")
-    List<Werknemer> findByFamilieNaamBevat(String naamBevat) {
+    List<WerknemerMetLocatie> findByFamilieNaamBevat(String naamBevat) {
         return werknemerService.findByFamilieNaamBevat(naamBevat);
     }
+
+
 }

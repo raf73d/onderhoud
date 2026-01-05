@@ -1,6 +1,6 @@
 package be.vdab.onderhoud.taken;
 
-import org.springframework.jdbc.core.simple.JdbcClient;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +20,17 @@ public class TakenService {
     {
         return takenRepository.findTakenByWerknemerId(werknemerId, locatieId);
     }
-   @Transactional (readOnly=false)
-    void updateTaakTellerEnOnderhoudsdatum(long id){
-        takenRepository.updateTaaktellerEnOnderhoudsdatum(id);
+   @Transactional
+    void updateTaakTellerEnOFOnderhoudsdatum(long id, String lastPerson){
+        var taak = takenRepository.findTaak(id).orElseThrow(()->new TaakNietGevondenException());
+
+            if (taak.getTeller() == null) {
+                   takenRepository.updateTaakOnderhoudsdatum(id, lastPerson);
+            }
+            else {
+                takenRepository.updateTaaktellerEnOnderhoudsdatum(id, lastPerson);
+            };
+
+
     }
 }

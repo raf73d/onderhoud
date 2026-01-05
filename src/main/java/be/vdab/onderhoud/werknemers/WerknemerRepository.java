@@ -22,4 +22,6 @@ public class WerknemerRepository {
                 .param("%"+woord+"%")
                 .query(Werknemer.class).list();
     }
+
+
 }

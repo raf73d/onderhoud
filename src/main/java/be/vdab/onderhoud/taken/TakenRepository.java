@@ -3,7 +3,9 @@ package be.vdab.onderhoud.taken;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class TakenRepository {
@@ -13,26 +15,40 @@ public class TakenRepository {
         this.jdbcClient = jdbcClient;
     }
 
-    void updateTaaktellerEnOnderhoudsdatum (long id) {
+    void updateTaaktellerEnOnderhoudsdatum (long id,String lastPerson) {
         var sql = """
                 update taken
                 set teller = 0,
-                    onderhoudsDatum = CURRENT_DATE()
+                    onderhoudsDatum = CURRENT_DATE(),
+                    status = 'GEDAAN',
+                    lastPerson = ?
                 where id = ?
                 """;
-        if (jdbcClient.sql(sql).param(id).update() == 0) {
+        if (jdbcClient.sql(sql).param(lastPerson).param(id).update() == 0) {
             throw new TaakNietGevondenException();
         }
     }
-    void updateTaakOnderhoudsdatum (long id) {
+    void updateTaakOnderhoudsdatum (long id, String lastPerson) {
         var sql = """
                 update taken
-                set onderhoudsDatum = currdate()
+                set onderhoudsDatum = CURRENT_DATE(),
+                    status = 'GEDAAN',
+                    lastPerson = ?
                 where id = ?
         """;
-        if (jdbcClient.sql(sql).param(id).update() == 0) {
+        if (jdbcClient.sql(sql).param(lastPerson).param(id).update() == 0) {
             throw new TaakNietGevondenException();
         }
+    }
+
+    Optional<Taak> findTaak(long id) {
+        var sql = """
+                select id, onderhoudsDatum, teller, omschrijving, machineId, limietId, maintenanceType, mode, status, version, lastPerson
+                from taken
+                where id = ?
+               
+        """;
+        return jdbcClient.sql(sql).param(id).query(Taak.class).optional();
     }
 
     List<Taak> findTakenByWerknemerId (long id, long locatieId){
@@ -45,7 +61,8 @@ public class TakenRepository {
                     machines.id as machineId,
                     maintenanceType,
                     mode,
-                    status
+                    status,
+                    lastPerson
                 from taken
                 inner join machines
                     on taken.machineId = machines.id
@@ -69,6 +86,14 @@ public class TakenRepository {
                 .param(id)
                 .param(locatieId)
                 .query(Taak.class).list();
+    }
+
+    public List<Taak> findTakenvanafDatum(LocalDate datum) {
+        var sql = """
+                select * from taken
+                where onderhoudsDatum = ?
+        """;
+        return jdbcClient.sql(sql).param(datum).query(Taak.class).list();
     }
 
     }

@@ -1,13 +1,15 @@
 "use strict";
 import {byId, toon, setText, verberg} from "./util.js";
-
+let taakId = null;
+let naamWerknemer = null;
 verberg("hoofd1");
 const werknemer = JSON.parse(sessionStorage.getItem("werknemer"));
 setText("werknemer", werknemer.familienaam + " " + werknemer.voornaam);
-setText("locatieId", werknemer.locatieId)
+naamWerknemer = werknemer.voornaam +" "+ werknemer.familienaam;
+setText("locatieId", werknemer.locatie);
 findTakenVanWerknemerOpLocatie(werknemer.id, werknemer.locatieId);
 
-//dropdownlistener();
+
 
 
 async function findTakenVanWerknemerOpLocatie(id, locatieId) {
@@ -28,20 +30,16 @@ async function findTakenVanWerknemerOpLocatie(id, locatieId) {
                 tr.insertCell().textContent = taak.maintenanceType;
                 tr.insertCell().textContent = taak.mode;
                 // tr.insertCell().textContent = taak.status;
+                tr.dataset.id = taak.id;
                 const td = tr.insertCell();
 
                 td.innerHTML = `
-  <div class="dropdown">
-    <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-      ${taak.status}
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#" data-status="NIETGEDAAN" data-id="${taak.status}">NIETGEDAAN</a></li>
-      <li><a class="dropdown-item" href="#" data-status="BEZIG" data-id="${taak.status}">BEZIG</a></li>
-      <li><a class="dropdown-item" href="#" data-status="GEDAAN" data-id="${taak.status}">GEDAAN</a></li>
-    </ul>
-  </div>
+  <button class="btn btn-sm btn-secondary status-btn" data-id="${taak.id}">
+    ${taak.status}
+  </button>
 `;
+
+
             }
         } else {
             byId('takenBody').innerHTML = "";
@@ -52,32 +50,44 @@ async function findTakenVanWerknemerOpLocatie(id, locatieId) {
         toon("storing");
     }
 }
-async function dropdownlistener() {
-    document.querySelectorAll('.dropdown-item').forEach(item => {
-        item.addEventListener('click', function (e) {
-            e.preventDefault();
+document.addEventListener("click", (e) => {
+    const clickedBtn = e.target;
 
-            const nieuweStatus = this.dataset.status;
-            const taakId = this.dataset.id;
+    // Check of het een status-knop is
+    if (!clickedBtn.classList.contains("status-btn")) return;
 
-            fetch(`/taken/${taakId}/status`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ status: nieuweStatus })
-            })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error("Status update mislukt");
-                    }
-
-                    // Update de tekst van de dropdown-knop
-                    this.closest('.dropdown')
-                        .querySelector('button')
-                        .textContent = nieuweStatus;
-                })
-                .catch(err => console.error(err));
-        });
+    // Reset alle andere knoppen
+    document.querySelectorAll(".status-btn").forEach(btn => {
+        btn.textContent = "NIETGEDAAN";
+        btn.classList.remove("btn-success");
+        btn.classList.add("btn-secondary");
     });
+
+    clickedBtn.textContent = "GEDAAN";
+    clickedBtn.classList.remove("btn-secondary");
+    clickedBtn.classList.add("btn-success");
+    toon("zoek");
+     taakId = clickedBtn.dataset.id;
+
+});
+
+byId("zoek").onclick = async function (){
+
+    const taakBevestigenResponse = await fetch(`taken/bevestigen/${taakId}`,
+        {
+            method: "PUT",
+            headers: {'Content-Type': "text/plain"},
+            //body: JSON.stringify(naamWerknemer),
+            body: naamWerknemer,
+        });
+    const rij = document.querySelector(`tr[data-id="${taakId}"]`);
+    rij.remove(); // Verwijder de rij
+    verberg("zoek");
+
+
+
 }
+
+
+
+

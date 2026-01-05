@@ -19,8 +19,8 @@ public class TakenController {
     List<Taak> findTakenByWerknemerId(@PathVariable long id, @PathVariable long locatieId) {
         return takenService.findTakenByWerknemerId(id, locatieId);
     }
-    @PutMapping("{id}")
-    void updateTakenTellerEnDatum(@PathVariable long id) {
-        takenService.updateTaakTellerEnOnderhoudsdatum(id);
+    @PutMapping("bevestigen/{id}")
+    void updateTakenTellerEnDatum(@PathVariable long id, @RequestBody String lastPerson) {
+        takenService.updateTaakTellerEnOFOnderhoudsdatum(id ,lastPerson);
     }
 }

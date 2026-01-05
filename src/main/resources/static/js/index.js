@@ -1,6 +1,8 @@
 "use strict";
 import {byId, toon, setText,verberg} from "./util.js";
 
+
+
 byId("zoek").onclick = async () =>{
     verberg("naamFout", "storing", "conflict","badRequest","mededeling");
     toon("hoofd1");
@@ -34,7 +36,7 @@ async function zoek (woord){
                 const td = tr.insertCell();
                 const hyperlink = document.createElement("a");
                 hyperlink.href = "takenlijst.html";
-                hyperlink.textContent= werknemer.locatieId;
+                hyperlink.textContent= werknemer.locatie;
                 hyperlink.onclick = () => {
                     sessionStorage.setItem("werknemer", JSON.stringify(werknemer));
                 }
@@ -52,3 +54,10 @@ async function zoek (woord){
         byId("werknemersBody").textContent = "";
     }
 }
+
+window.onload = () => {
+    const knop = document.getElementById("ing");
+    knop.onclick = () => {
+        window.location.href = "check.html";
+    };
+};
