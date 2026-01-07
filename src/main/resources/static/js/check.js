@@ -29,8 +29,19 @@ byId("statusBevestigen").onclick = async () =>{
         body: JSON.stringify("Engineer " +new Date().toISOString())}
                                               );
     if(taakAanpassing.ok){
-    verberg("statusBevestigen ");
-}
+    verberg("statusBevestigen");
+
+        const table = byId("takenBody");
+        const rij = [...takenBody.rows].find(r => r.dataset.id === String(taakId));
+        if (rij) rij.remove();
+
+
+
+    }
+    else
+    {
+        toon("backuptaakFout");
+    }
 }
 
 async function toonTakenVanaf (datum) {
@@ -43,6 +54,7 @@ async function toonTakenVanaf (datum) {
             verberg("datumFout");
             for (const taak of takenlijst) {
                 const tr = takenBody.insertRow();
+                tr.dataset.id = taak.id;
                 //tr.insertCell().textContent = taak.id;
                 const td = tr.insertCell();
                 const hyperlink = document.createElement("a");
@@ -53,6 +65,9 @@ async function toonTakenVanaf (datum) {
                     toon("statusBevestigen");
                     toon("taakidRollback");
                     setText("taakidRollback", taak.id);
+                    verberg("backuptaakFout");
+                //    sessionStorage.setItem("taakRowIndex", tr.rowIndex);
+
                 }
                 td.appendChild(hyperlink);
                 tr.insertCell().textContent = taak.onderhoudsDatum;
