@@ -41,6 +41,25 @@ public class TakenRepository {
         }
     }
 
+    void herstelTaak (long id, LocalDate onderhoudsDatum, Integer teller, String lastPerson ) {
+        var sql = """
+                update taken
+                set onderhoudsDatum = ?,
+                teller = ?,
+                status = 'NIETGEDAAN',
+                lastPerson = ?
+                where id = ?
+        """;
+        if (jdbcClient.sql(sql)
+                .param(onderhoudsDatum)
+                .param(teller)
+                .param(lastPerson)
+                .param(id)
+                .update() == 0) {
+            throw new TaakNietGevondenException();
+        }
+    }
+
     Optional<Taak> findTaak(long id) {
         var sql = """
                 select id, onderhoudsDatum, teller, omschrijving, machineId, limietId, maintenanceType, mode, status, version, lastPerson

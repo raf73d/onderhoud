@@ -29,4 +29,9 @@ public class TakenController {
     void updateTakenTellerEnDatum(@PathVariable long id, @RequestBody String lastPerson) {
         takenService.updateTaakTellerEnOFOnderhoudsdatum(id ,lastPerson);
     }
+
+    @PutMapping("{id}/aanpassen")
+    void rollBackTaak(@PathVariable int id, @RequestBody String persoon) {
+        takenService.rollBackTaak(id,persoon);
+    }
 }

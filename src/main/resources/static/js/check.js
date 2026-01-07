@@ -2,6 +2,7 @@
 import {byId, toon, setText, verberg} from "./util.js";
 verberg("hoofd1");
 byId("datumKnop").onclick = async () =>{
+    verberg("statusBevestigen");
     const datumInvoer = byId("datum");
     if (!datumInvoer.checkValidity()){
         toon("datumFout");
@@ -20,6 +21,18 @@ byId("datumKnop").onclick = async () =>{
     }
 }
 
+byId("statusBevestigen").onclick = async () =>{
+    const taakId = JSON.parse(sessionStorage.getItem("taakid"));
+    const taakAanpassing = await fetch(`taken/${taakId}/aanpassen`,
+        {method: "PUT",
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify("Engineer " +new Date().toISOString())}
+                                              );
+    if(taakAanpassing.ok){
+    verberg("statusBevestigen ");
+}
+}
+
 async function toonTakenVanaf (datum) {
     const takenVanafResponse = await fetch(`taken?datum=${datum}`);
     if (takenVanafResponse.ok) {
@@ -30,7 +43,18 @@ async function toonTakenVanaf (datum) {
             verberg("datumFout");
             for (const taak of takenlijst) {
                 const tr = takenBody.insertRow();
-                tr.insertCell().textContent = taak.id;
+                //tr.insertCell().textContent = taak.id;
+                const td = tr.insertCell();
+                const hyperlink = document.createElement("a");
+                hyperlink.textContent= taak.id;
+                hyperlink.href = `#`;
+                hyperlink.onclick = () => {
+                    sessionStorage.setItem("taakid", JSON.stringify(taak.id));
+                    toon("statusBevestigen");
+                    toon("taakidRollback");
+                    setText("taakidRollback", taak.id);
+                }
+                td.appendChild(hyperlink);
                 tr.insertCell().textContent = taak.onderhoudsDatum;
                 tr.insertCell().textContent = taak.teller;
                 tr.insertCell().textContent = taak.omschrijving;

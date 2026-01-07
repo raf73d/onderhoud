@@ -4,17 +4,17 @@ import java.time.LocalDate;
 import java.util.Date;
 
 public class Taak {
-    private final Long id;
-    private final LocalDate onderhoudsDatum;
-    private final Integer teller;
+    private final long id;
+    private  LocalDate onderhoudsDatum;
+    private  Integer teller;
     private final String omschrijving;
     private final long machineId;
     private final MaintenanceType maintenanceType;
     private final Mode mode;
-    private final Status status;
-    private final String lastPerson;
+    private  Status status;
+    private  String lastPerson;
 
-    public Taak(Long id, LocalDate onderhoudsDatum, Integer teller, String omschrijving, long machineId, MaintenanceType maintenanceType, Mode mode, Status status, String lastPerson) {
+    public Taak(long id, LocalDate onderhoudsDatum, Integer teller, String omschrijving, long machineId, MaintenanceType maintenanceType, Mode mode, Status status, String lastPerson) {
         this.id = id;
         this.onderhoudsDatum = onderhoudsDatum;
         this.teller = teller;
@@ -26,11 +26,27 @@ public class Taak {
         this.lastPerson = lastPerson;
     }
 
+    public void setOnderhoudsDatum(LocalDate onderhoudsDatum) {
+        this.onderhoudsDatum = onderhoudsDatum;
+    }
+
+    public void setLastPerson(String lastPerson) {
+        this.lastPerson = lastPerson;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setTeller(Integer teller) {
+        this.teller = teller;
+    }
+
     public LocalDate getOnderhoudsDatum() {
         return onderhoudsDatum;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
