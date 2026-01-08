@@ -19,8 +19,76 @@
             login: <span id="userName"></span>
 
         </div>
-
     </div>
+    <div class="row">
+        <div class="col">
+            <ul class="nav">
+                <li class="nav-item bg-dark-subtle me-1">
+                    <a class="nav-link" href="index.html">Thuis</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            werknemer:
+        </div>
+        <div class="col-6">
+            <span id="werknemer"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            datum:
+        </div>
+        <div class="col-6">
+            <span id="date"></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-1">
+            logging:
+        </div>
+        <div class="col-6">
+            <div class="mb-3">
+                <label for="logging" class="form-label">Vermeld verbeteringen, correctieve zaken</label>
+                <textarea class="form-control" id="logging" rows="4"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+
+        </div>
+            <div class="col-2">
+                <button class="btn-outline-dark rounded-2" id="schrijf">schrijf weg</button>
+            </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <h2>historiek</h2>
+        </div>
+        <div class="col-2">
+            <button style="margin-left: -70px;"
+                    class="btn-outline-dark rounded-2 mt-2" id="vernieuw">vernieuw</button>
+        </div>
+    </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped">
+                    <thead id="hoofd1">
+                    <tr>
+                        <th>id</th>
+                        <th>datumEnTijd</th>
+                        <th>logging</th>
+                        <th>persoon</th>
+                    </tr>
+                    </thead>
+                    <tbody id="loggingBody"></tbody>
+                </table>
+            </div>
+        </div>
+
 </div>
 </body>
 </html>

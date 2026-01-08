@@ -1,0 +1,45 @@
+"use strict";
+import {getPrincipal, toon, setText, byId, verberg} from "./util.js";
+
+getPrincipal();
+toonlogging();
+var date = new Date();
+setText("date", date.toISOString());
+const werknemer = JSON.parse(sessionStorage.getItem("werknemer"));
+setText("werknemer", werknemer.voornaam + " " + werknemer.familienaam);
+
+byId("schrijf").onclick = async () => {
+    const werknemerDatumLogging = {
+        datumEnTijd: date.toISOString(),
+        persoon: werknemer.voornaam + " " + werknemer.familienaam,
+        logging: byId("logging").value
+    };
+    const loggingResponse = await fetch("loggingen",
+        {
+            method: "POST",
+            headers: {'Content-Type': "application/json"},
+            body: JSON.stringify(werknemerDatumLogging)
+        });
+    if (loggingResponse.ok) {
+        verberg("schrijf");
+        byId("logging").value ="";
+    }
+};
+async function toonlogging() {
+    const loggingResponse = await fetch("loggingen");
+    if (loggingResponse.ok) {
+        const loggingen = await loggingResponse.json();
+        const loggingBody = byId("loggingBody");
+        for (const logging of loggingen) {
+            const tr =loggingBody.insertRow();
+            tr.insertCell().textContent = logging.id;
+            tr.insertCell().textContent = logging.datumEnTijd;
+            tr.insertCell().textContent = logging.logging;
+            tr.insertCell().textContent = logging.persoon;
+        }
+    }
+}
+byId("vernieuw").onclick = async () => {
+    byId("loggingBody").innerHTML = "";
+    toonlogging();
+}
