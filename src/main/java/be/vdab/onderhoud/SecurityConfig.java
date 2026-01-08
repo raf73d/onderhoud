@@ -32,7 +32,7 @@ public class SecurityConfig {
         http.formLogin(withDefaults());
         http.csrf(csrf -> csrf.disable());
         http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/login","/images/**", "/css/**", "/js/**", "/", "/accessDenied.html").permitAll()
+                .requestMatchers("/login","/images/**", "/css/**", "/js/**", "/", "/accessDenied.html","/principal").permitAll()
                 .requestMatchers(HttpMethod.PUT,"/taken/bevestigen/**").permitAll()
                 .requestMatchers("/check.html").hasAuthority(INGENIEUR)
                 .requestMatchers("/index.html").hasAnyAuthority(TECHNIEKER, INGENIEUR)
