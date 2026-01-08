@@ -1,14 +1,7 @@
 "use strict";
-import {byId, toon, setText,verberg} from "./util.js";
-const response = await fetch("principal");
-if (response.ok) {
-    const userName = await response.text();
-    document.getElementById("userName").textContent = userName;
-} else {
-    alert("Technische storing");
+import {byId, toon, setText,verberg,getPrincipal} from "./util.js";
 
-}
-
+getPrincipal();
 
 byId("zoek").onclick = async () =>{
     verberg("naamFout", "storing", "conflict","badRequest","mededeling");

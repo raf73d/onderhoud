@@ -1,5 +1,6 @@
 "use strict";
-import {byId, toon, setText, verberg} from "./util.js";
+import {byId, toon, setText, verberg,getPrincipal} from "./util.js";
+getPrincipal();
 let taakId = null;
 let naamWerknemer = null;
 verberg("hoofd1");

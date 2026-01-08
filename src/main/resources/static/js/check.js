@@ -1,5 +1,6 @@
 "use strict";
-import {byId, toon, setText, verberg} from "./util.js";
+import {byId, toon, setText, verberg,getPrincipal} from "./util.js";
+getPrincipal();
 verberg("hoofd1");
 byId("datumKnop").onclick = async () =>{
     verberg("statusBevestigen");
