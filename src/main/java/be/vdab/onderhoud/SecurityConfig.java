@@ -34,7 +34,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/login","/images/**", "/css/**", "/js/**", "/", "/accessDenied.html","/principal").permitAll()
                 .requestMatchers(HttpMethod.PUT,"/taken/bevestigen/**").permitAll()
-                .requestMatchers(HttpMethod.GET)
+                .requestMatchers(HttpMethod.GET,"/loggingen/**")
                 .permitAll()
                 .requestMatchers("/check.html").hasAuthority(INGENIEUR)
                 .requestMatchers("/index.html").hasAnyAuthority(TECHNIEKER, INGENIEUR)
