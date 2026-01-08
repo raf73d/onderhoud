@@ -3,6 +3,7 @@ import {byId, toon, setText, verberg} from "./util.js";
 verberg("hoofd1");
 byId("datumKnop").onclick = async () =>{
     verberg("statusBevestigen");
+    verberg("backuptaakFout");
     const datumInvoer = byId("datum");
     if (!datumInvoer.checkValidity()){
         toon("datumFout");
