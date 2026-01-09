@@ -3,6 +3,8 @@ package be.vdab.onderhoud.loggingen;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -24,5 +26,9 @@ public class LoggingenController {
     @GetMapping
     List<Logging> findAll(){
         return loggingenService.findAll();
+    }
+    @GetMapping(params = {"van", "tot"})
+    List<Logging> findBetweenDatums(LocalDate van, LocalDate tot){
+        return loggingenService.findBetweenDatums(van,tot);
     }
 }

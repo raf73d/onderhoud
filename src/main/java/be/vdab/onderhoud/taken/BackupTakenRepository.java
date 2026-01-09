@@ -3,6 +3,8 @@ package be.vdab.onderhoud.taken;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -36,6 +38,8 @@ public class BackupTakenRepository {
         return jdbcClient.sql(sql).param(taakId).query(BackupTaak.class).optional();
 
     }
+
+
 
 
 }

@@ -4,6 +4,8 @@ import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,5 +34,15 @@ public class LoggingenRepository {
                 order by datumEnTijd desc
                 """;
         return jdbcClient.sql(sql).query(Logging.class).list();
+     }
+
+     List<Logging> findBetweenDatums(LocalDate van, LocalDate tot) {
+        var sql= """
+                select id,datumEnTijd,logging,persoon
+                from loggingen
+                where datumEnTijd between ? and ?
+                order by datumEnTijd desc
+                """;
+        return jdbcClient.sql(sql).params(van, tot).query(Logging.class).list();
      }
 }

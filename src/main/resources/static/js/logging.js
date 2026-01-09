@@ -39,7 +39,44 @@ async function toonlogging() {
         }
     }
 }
+
+async function toonloggingTussendatums(van,tot) {
+    const toonloggingResponse = await fetch(`loggingen?van=${van}&tot=${tot}`);
+    if (toonloggingResponse.ok) {
+        const loggingen = await toonloggingResponse.json();
+        const loggingBody = byId("loggingBody");
+        for (const logging of loggingen) {
+            const tr = loggingBody.insertRow();
+            tr.insertCell().textContent = logging.id;
+            tr.insertCell().textContent = logging.datumEnTijd;
+            tr.insertCell().textContent = logging.logging;
+            tr.insertCell().textContent = logging.persoon;
+        }
+    }
+}
 byId("vernieuw").onclick = async () => {
     byId("loggingBody").innerHTML = "";
-    toonlogging();
+    const datumVan = byId("vanDatum");
+    const datumTot = byId("totDatum");
+    toonloggingTussendatums(datumVan.value, datumTot.value);
 }
+
+const input = document.getElementById("totDatum");
+const inputVan = document.getElementById("vanDatum");
+
+const vandaag = new Date();
+const vandaag2 = new Date();
+
+// morgen
+vandaag.setDate(vandaag.getDate() + 1);
+
+// 10 dagen geleden
+vandaag2.setDate(vandaag2.getDate() - 10);
+
+// omzetten naar yyyy-mm-dd
+const morgen = vandaag.toISOString().split("T")[0];
+const tienDagenGeleden = vandaag2.toISOString().split("T")[0];
+
+input.value = morgen;
+inputVan.value = tienDagenGeleden;
+
