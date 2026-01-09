@@ -1,14 +1,18 @@
 package be.vdab.onderhoud.loggingen;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
 
 public class Logging {
     private final int id;
     private final LocalDateTime datumEnTijd;
+    @Size(max = 100)
     private final String logging;
     private final String  persoon;
 
-    public Logging(int id, LocalDateTime datumEnTijd, String logging, String persoon) {
+    public Logging(int id, LocalDateTime datumEnTijd, @Valid String logging, String persoon) {
         this.id = id;
         this.datumEnTijd = datumEnTijd;
         this.logging = logging;

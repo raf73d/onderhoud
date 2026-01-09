@@ -57,7 +57,12 @@
         <div class="col-6">
             <div class="mb-3">
                 <label for="logging" class="form-label">Vermeld verbeteringen, correctieve zaken</label>
-                <textarea class="form-control" id="logging" rows="4"></textarea>
+                <textarea class="form-control" id="logging" rows="4" maxlength="100"
+                ></textarea>
+                <div class="form-text" id="remainingzin">
+                    Nog <span id="remaining">100</span> karakters over
+                </div>
+
             </div>
         </div>
     </div>

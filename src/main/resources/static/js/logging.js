@@ -23,6 +23,7 @@ byId("schrijf").onclick = async () => {
     if (loggingResponse.ok) {
         verberg("schrijf");
         byId("logging").value ="";
+        byId("remainingzin").innerText="Logging weggeschreven.";
     }
 };
 async function toonlogging() {
@@ -79,4 +80,15 @@ const tienDagenGeleden = vandaag2.toISOString().split("T")[0];
 
 input.value = morgen;
 inputVan.value = tienDagenGeleden;
+
+const textarea = document.getElementById("logging");
+const remaining = document.getElementById("remaining");
+
+textarea.addEventListener("input", () => {
+    const max = textarea.maxLength;
+    const used = textarea.value.length;
+    remaining.textContent = max - used;
+});
+
+
 
