@@ -1,17 +1,26 @@
 "use strict";
 import {getPrincipal, toon, setText, byId, verberg} from "./util.js";
 
-getPrincipal();
+await getPrincipal();
 toonlogging();
+let werknemer;
 var date = new Date();
 setText("date", date.toISOString());
-const werknemer = JSON.parse(sessionStorage.getItem("werknemer"));
-setText("werknemer", werknemer.voornaam + " " + werknemer.familienaam);
-
+const username = byId("userName");
+if (username.textContent.trim() === "ing"){
+     werknemer = username.textContent.toString();
+    setText("werknemer", werknemer);
+}
+else {
+     werknemer = JSON.parse(sessionStorage.getItem("werknemer"));
+    setText("werknemer", werknemer.voornaam + " " + werknemer.familienaam);
+}
 byId("schrijf").onclick = async () => {
     const werknemerDatumLogging = {
         datumEnTijd: date.toISOString(),
-        persoon: werknemer.voornaam + " " + werknemer.familienaam,
+        persoon:  (username.textContent.trim().toLowerCase() === "ing")
+        ? "ing"
+        : werknemer.voornaam + " " + werknemer.familienaam,
         logging: byId("logging").value
     };
     const loggingResponse = await fetch("loggingen",

@@ -20,14 +20,17 @@
         <div class="row">
             <div class="col">
                 <ul class="nav">
-                    <li class="nav-item bg-dark-subtle">
+                    <li class="nav-item bg-dark-subtle me-1">
                         <a class="nav-link" href="check.html">Check</a>
+                    </li>
+                    <li class="nav-item bg-body-secondary me-1">
+                        <a class="nav-link" href="login" hidden id="loginknop">Login</a>
                     </li>
                 </ul>
             </div>
 
     </div>
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-3">
             <label>familienaam:
                 <input id="naam" autocomplete="off" pattern="[A-Za-zÀ-ÖØ-öø-ÿ]+([ \-][A-Za-zÀ-ÖØ-öø-ÿ]+)*"
@@ -43,6 +46,7 @@
             <div id="conflict" class="fout" hidden>conflict</div>
             <div id="badRequest" class="fout" hidden>badrequest</div>
             <div id="mededeling" class="bg-danger-subtle text-white p-2 rounded" hidden>Geen werknemers gevonden!</div>
+            <div id="loginNok" class="bg-danger-subtle text-white-50 p-2 rounded" hidden>toegang geweigerd, enkel voor techs</div>
         </div>
     </div>
     <div class="row">

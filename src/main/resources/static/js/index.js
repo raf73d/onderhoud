@@ -49,9 +49,18 @@ async function zoek (woord){
         }
     }
     else{
-        toon("storing");
-        verberg("hoofd1");
-        byId("werknemersBody").textContent = "";
+        const username = byId("userName");
+         if (username.textContent === "ing"){
+             toon("loginNok");
+             toon("loginknop");
+             verberg("hoofd1");
+             byId("werknemersBody").textContent = "";
+         }
+         else {
+             toon("storing");
+             verberg("hoofd1");
+             byId("werknemersBody").textContent = "";
+         }
     }
 }
 
