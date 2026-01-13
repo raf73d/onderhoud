@@ -20,11 +20,11 @@ public class TakenRepository {
                 update taken
                 set teller = 0,
                     onderhoudsDatum = CURRENT_DATE(),
-                    status = 'GEDAAN',
+                    status = ?,
                     lastPerson = ?
                 where id = ?
                 """;
-        if (jdbcClient.sql(sql).param(lastPerson).param(id).update() == 0) {
+        if (jdbcClient.sql(sql).param(Status.GEDAAN.name()).param(lastPerson).param(id).update() == 0) {
             throw new TaakNietGevondenException();
         }
     }
@@ -32,11 +32,11 @@ public class TakenRepository {
         var sql = """
                 update taken
                 set onderhoudsDatum = CURRENT_DATE(),
-                    status = 'GEDAAN',
+                    status = ?,
                     lastPerson = ?
                 where id = ?
         """;
-        if (jdbcClient.sql(sql).param(lastPerson).param(id).update() == 0) {
+        if (jdbcClient.sql(sql).param(Status.GEDAAN.name()).param(lastPerson).param(id).update() == 0) {
             throw new TaakNietGevondenException();
         }
     }
@@ -46,13 +46,14 @@ public class TakenRepository {
                 update taken
                 set onderhoudsDatum = ?,
                 teller = ?,
-                status = 'NIETGEDAAN',
+                status = ?,
                 lastPerson = ?
                 where id = ?
         """;
         if (jdbcClient.sql(sql)
                 .param(onderhoudsDatum)
                 .param(teller)
+                .param(Status.NIETGEDAAN.name())
                 .param(lastPerson)
                 .param(id)
                 .update() == 0) {
