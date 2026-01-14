@@ -12045,5 +12045,17 @@ textarea.form-control-lg {
   }
 }
 
+.bg-koffie {
+    background-image: url('../images/modern.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    min-height: 100vh; /* vult het hele scherm */
+}
+
+
+
+
 /*# sourceMappingURL=bootstrap.css.map */
 

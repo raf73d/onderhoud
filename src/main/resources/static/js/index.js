@@ -73,3 +73,6 @@ window.onload = () => {
         window.location.href = "check.html";
     };
 };
+
+    const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));

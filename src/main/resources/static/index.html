@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-<div class="container-lg bg-light-subtle">
+<div class="container-lg bg-light">
     <div class="row">
         <div class="col-6">
             <h1>Werknemer</h1>
@@ -21,7 +21,9 @@
             <div class="col">
                 <ul class="nav">
                     <li class="nav-item bg-dark-subtle me-1">
-                        <a class="nav-link" href="check.html">Check</a>
+                        <a class="nav-link" href="check.html" data-bs-toggle="tooltip"
+                           title="ing login"
+                        >Check</a>
                     </li>
                     <li class="nav-item bg-body-secondary me-1">
                         <a class="nav-link" href="login" hidden id="loginknop">Login</a>
@@ -38,7 +40,8 @@
             </label>
         </div>
         <div class="col-2">
-            <button class="btn-outline-dark rounded-2" id="zoek">zoek werknemer</button>
+            <button class="btn-outline-dark rounded-2" id="zoek"  data-bs-toggle="tooltip"
+                    title="tech login">zoek werknemer </button>
         </div>
         <div class="col-4">
             <span id="naamFout" class="bg-danger-subtle text-white p-2 rounded" hidden>naam nok</span>
