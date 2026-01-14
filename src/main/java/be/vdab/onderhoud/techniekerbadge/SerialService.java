@@ -11,8 +11,15 @@ import java.io.OutputStream;
     @Service
     public class SerialService {
         private SerialPort port;
+        private String portNaam;
         public String startSerialCommunication() throws Exception {
-            port = SerialPort.getCommPort("COM6");
+
+            SerialPort[] ports = SerialPort.getCommPorts();
+            for (SerialPort p : ports) {
+                 portNaam = p.getSystemPortName();
+            }
+
+            port = SerialPort.getCommPort(portNaam);
             port.setBaudRate(9600);
             port.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
 
@@ -46,7 +53,8 @@ import java.io.OutputStream;
         public boolean isArduinoConnected() {
             SerialPort[] ports = SerialPort.getCommPorts();
             for (SerialPort p : ports) {
-                if (p.getSystemPortName().equals("COM6")) {
+                String name = p.getSystemPortName();
+                if (name.equals("COM6") || (name.equals("COM7"))) {
                     return true;
                 }
             }
