@@ -35,7 +35,10 @@ async function zoek (woord){
                 tr.insertCell().textContent = werknemer.voornaam;
                 const td = tr.insertCell();
                 const hyperlink = document.createElement("a");
-                hyperlink.href = "takenlijst.html";
+                //originele paginareferentie
+             //   hyperlink.href = "takenlijst.html";
+                // verwijzing naar de arduinoCheck
+                hyperlink.href = "extracheck.html";
                 hyperlink.textContent= werknemer.locatie;
                 hyperlink.onclick = () => {
                     sessionStorage.setItem("werknemer", JSON.stringify(werknemer));

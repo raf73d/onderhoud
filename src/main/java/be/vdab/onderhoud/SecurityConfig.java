@@ -36,6 +36,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT,"/taken/bevestigen/**").permitAll()
                 .requestMatchers(HttpMethod.GET,"/loggingen/**")
                 .permitAll()
+                .requestMatchers(HttpMethod.GET,"/serial/start")
+                .permitAll()
                 .requestMatchers(HttpMethod.GET,"/werknemers/**").hasAuthority(TECHNIEKER)
                 .requestMatchers("/check.html").hasAuthority(INGENIEUR)
                 .requestMatchers("/index.html").hasAnyAuthority(TECHNIEKER, INGENIEUR)
