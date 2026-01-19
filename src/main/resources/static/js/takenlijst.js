@@ -1,6 +1,22 @@
 "use strict";
 import {byId, toon, setText, verberg,getPrincipal} from "./util.js";
-getPrincipal();
+const checklink = document.getElementById("checklink");
+const zoekknop = document.getElementById("zoek");
+getPrincipal().then(async () => {
+    const username = document.getElementById("userName");
+    const lognaamResponse = await fetch(`users/1`);
+    if (lognaamResponse.ok) {
+        const logname = await lognaamResponse.text();
+        if (username.textContent.trim() === logname.trim()) {
+            checklink.classList.add("disabled");
+        } else {
+            zoekknop.classList.add("disabled")
+        }
+    }
+    ;
+});
+
+
 let taakId = null;
 let naamWerknemer = null;
 verberg("hoofd1");
@@ -91,5 +107,11 @@ byId("zoek").onclick = async function (){
 
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
 const tooltipList = [...tooltipTriggerList].map(el => new bootstrap.Tooltip(el));
+
+
+
+const username = document.getElementById("userName");
+
+
 
 

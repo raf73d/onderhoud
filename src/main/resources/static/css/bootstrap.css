@@ -12053,7 +12053,12 @@ textarea.form-control-lg {
     width: 100%;
     min-height: 100vh; /* vult het hele scherm */
 }
-
+#checklink.disabled,
+#zoek.disabled{
+    pointer-events: none !important;
+    opacity: 0.5;
+    cursor: default;
+}
 
 
 
